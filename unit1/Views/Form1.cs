@@ -23,7 +23,7 @@ namespace unit1
         {
             InitializeComponent();
             draw.DrawMap(getPB);
-            logic.SetupCenter();
+            logic.SetupCenters();
         }
 
         
@@ -37,6 +37,8 @@ namespace unit1
         private void button2_Click(object sender, EventArgs e) //перетасовать ловушки
         {
             draw.DrawMap(getPB);
+            logic.SetupCenters();
+            draw.PlaceTraps(getPB, logic.SetupTraps());
         }
 
         public PictureBox getPB

@@ -12,9 +12,11 @@ namespace unit1.Model
         //Point[] points;
         const int n = 9; // размерность массива
 
+        int[] traps = new int[n] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        
         List<Point> points = new List<Point>();
 
-        public void SetupCenter()
+        public void SetupCenters()
         {
             points.Add(new Point(40, 40));
             points.Add(new Point(120, 40));
@@ -35,19 +37,26 @@ namespace unit1.Model
             return dot;
         }
 
-        public int[,] SetTrap()
+        public int[] SetupTraps()
         {
             Random rnd = new Random();
             int type;
-            int k = 0, m = 0;
-            int[,] traps = new int[3, 1] { { 0 }, { 0 }, { 0 } };
-            for(int i = 1; i <= n; i++)
+            int k = 0;
+            while (k < 6)
             {
-                type = rnd.Next(1, 4);
-
+                type = rnd.Next(1, 9);
+                if(traps[type] == 0)
+                {
+                    if (k > 2)
+                        traps[type] = 2;
+                    else
+                        traps[type] = 1;
+                    k++;
+                }
             }
-
             return traps;
         }
+
+
     }
 }

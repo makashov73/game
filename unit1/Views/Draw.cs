@@ -47,8 +47,6 @@ namespace unit1.Views
                     new Point(160, 239)
                 };
                 g.DrawLines(blackPen, points);
-
-
             }
         }
 
@@ -82,12 +80,13 @@ namespace unit1.Views
             }
         }
 
-        public void PlaceTraps(PictureBox gamemap)
+        public void PlaceTraps(PictureBox gamemap, int[] traps)
         {
+            gamemap.Image = new Bitmap(gamemap.Width, gamemap.Height);
             using (Graphics g = Graphics.FromImage(gamemap.Image))
             {
-                
-                Point[] points =
+
+                /*Point[] points =
                 {
                     new Point(40, 40),
                     new Point(120, 40),
@@ -100,7 +99,14 @@ namespace unit1.Views
                     new Point(200,200)
                 };
 
-                g.DrawLines(blackPen, points);
+                g.DrawLines(blackPen, points);*/
+
+                // цикл по массиву
+                // если элемент = 0 - ничего
+                // если элемент = 1 - колокольчик
+                // если элемент = 2 - детектор протоплазмы
+                // GetCenterById
+
             }
         }
 
