@@ -11,9 +11,10 @@ namespace unit1.Views
 {
     class Draw
     {
-        //Form1 mainForm = new Form1();
-                
+        Logic logic = new Logic();
+        
         Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 1);
+        Pen catTrace = new Pen(Color.FromArgb(255, 58, 119, 227), 3);
         Pen blackPenTraps = new Pen(Color.FromArgb(255, 0, 0, 0), 2);
 
         /*public void Initializer(PictureBox gamemap)
@@ -50,10 +51,15 @@ namespace unit1.Views
             }
         }
 
-        public void DrawMap2(PictureBox gamemap) // отрисовка поля
+        public void DrawTrace(PictureBox gamemap) // отрисовка поля
         {
-            
-            gamemap.Refresh();
+            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            {
+
+
+                g.DrawLine(catTrace, logic.GetCenterById(4), logic.MoveLeft(new Point(40,40)));
+                gamemap.Refresh();
+            }
         }
 
         public void DrawRing(PictureBox gamemap)
@@ -75,16 +81,60 @@ namespace unit1.Views
                     new Point(200,200)
                 };
                 
-                g.DrawLines(blackPen, points);
+                g.DrawLines(blackPenTraps, points);
+                gamemap.Refresh();
+            }
+        }
+
+        public void DrawBell(PictureBox gamemap, int id)
+        {
+            Point centr = logic.GetCenterById(id);
+
+            Point[] bell =
+            {
+                new Point(centr.X-40,centr.Y),
+                new Point(centr.X,centr.Y-40),
+                new Point(centr.X+40,centr.Y),
+                new Point(centr.X,centr.Y+40),
+                new Point(centr.X-40,centr.Y)
+            };
+
+            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            {
+                g.DrawLines(blackPenTraps, bell);
+                gamemap.Refresh();
+            }
+        }
+
+        public void DrawPlasm(PictureBox gamemap, int id)
+        {
+            Point centr = logic.GetCenterById(id);
+
+            Point[] bell =
+            {
+                new Point(centr.X-40,centr.Y),
+                new Point(centr.X-10,centr.Y-10),
+                new Point(centr.X,centr.Y-40),
+                new Point(centr.X+10,centr.Y-10),
+                new Point(centr.X+40,centr.Y),
+                new Point(centr.X+10,centr.Y+10),
+                new Point(centr.X,centr.Y+40),
+                new Point(centr.X-10,centr.Y+10),
+                new Point(centr.X-40,centr.Y)
+            };
+
+            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            {
+                g.DrawLines(blackPen, bell);
                 gamemap.Refresh();
             }
         }
 
         public void PlaceTraps(PictureBox gamemap, int[] traps)
         {
-            gamemap.Image = new Bitmap(gamemap.Width, gamemap.Height);
-            using (Graphics g = Graphics.FromImage(gamemap.Image))
-            {
+            //gamemap.Image = new Bitmap(gamemap.Width, gamemap.Height);
+            //using (Graphics g = Graphics.FromImage(gamemap.Image))
+            //{
 
                 /*Point[] points =
                 {
@@ -106,8 +156,9 @@ namespace unit1.Views
                 // если элемент = 1 - колокольчик
                 // если элемент = 2 - детектор протоплазмы
                 // GetCenterById
+            //}
 
-            }
+
         }
 
         public void ClearTrace()

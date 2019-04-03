@@ -17,17 +17,17 @@ namespace unit1
     {
         Draw draw = new Draw();
         Logic logic = new Logic();
+
+        int[] traps = new int[9];
         //Placer placer = new Placer();
         
         public Form1()
         {
             InitializeComponent();
             draw.DrawMap(getPB);
-            logic.SetupCenters();
         }
 
         
-
         private void button1_Click(object sender, EventArgs e) // стереть тракектории
         {
 
@@ -37,6 +37,7 @@ namespace unit1
         private void button2_Click(object sender, EventArgs e) //перетасовать ловушки
         {
             draw.DrawMap(getPB);
+            logic.ClearTraps();
             logic.SetupCenters();
             draw.PlaceTraps(getPB, logic.SetupTraps());
         }
@@ -52,7 +53,13 @@ namespace unit1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(logic.GetCenterById(2).ToString());
+            //MessageBox.Show(logic.GetCenterById(4).ToString());
+            draw.DrawTrace(getPB);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
         }
 
 
