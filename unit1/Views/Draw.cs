@@ -14,7 +14,6 @@ namespace unit1.Views
         Logic logic = new Logic();
         
         Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 1);
-        Pen catTrace = new Pen(Color.FromArgb(255, 58, 119, 227), 3);
         Pen blackPenTraps = new Pen(Color.FromArgb(255, 0, 0, 0), 2);
 
         /*public void Initializer(PictureBox gamemap)
@@ -51,13 +50,12 @@ namespace unit1.Views
             }
         }
 
-        public void DrawTrace(PictureBox gamemap) // отрисовка поля
+        public void DrawTrace(Point[] trace, PictureBox gamemap, Pen ct) // отрисовка поля
         {
             using (Graphics g = Graphics.FromImage(gamemap.Image))
             {
-
-
-                g.DrawLine(catTrace, logic.GetCenterById(4), logic.MoveLeft(new Point(40,40)));
+                
+                g.DrawLines(ct, trace);
                 gamemap.Refresh();
             }
         }

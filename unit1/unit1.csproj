@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\Placer.cs" />
+    <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Logic.cs" />
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>

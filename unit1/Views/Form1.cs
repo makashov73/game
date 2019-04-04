@@ -17,6 +17,7 @@ namespace unit1
     {
         Draw draw = new Draw();
         Logic logic = new Logic();
+        Pen catTrace = new Pen(Color.FromArgb(255, 58, 119, 227), 3);
 
         int[] traps = new int[9];
         //Placer placer = new Placer();
@@ -30,8 +31,8 @@ namespace unit1
         
         private void button1_Click(object sender, EventArgs e) // стереть тракектории
         {
-
-            draw.DrawRing(getPB);
+            draw.DrawMap(getPB);
+            //draw.DrawRing(getPB);
         }
         
         private void button2_Click(object sender, EventArgs e) //перетасовать ловушки
@@ -54,7 +55,10 @@ namespace unit1
         private void button3_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(logic.GetCenterById(4).ToString());
-            draw.DrawTrace(getPB);
+            //draw.DrawTrace(getPB);
+            Entity Meow = logic.Start();
+            draw.DrawTrace(logic.BuildTrace(Meow), getPB, catTrace);
+            //MessageBox.Show(logic.BuildTrace(Meow).ToString());
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -14,6 +14,8 @@ namespace unit1.Model
     {
 
         //Draw draw = new Draw();
+
+        
         //Point[] points;
         const int n = 9; // размерность массива
         int[] traps = new int[n] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -30,7 +32,6 @@ namespace unit1.Model
             points.Add(new Point(40, 200));
             points.Add(new Point(120, 200));
             points.Add(new Point(200, 200));
-
         }
 
         public void ClearTraps()
@@ -58,29 +59,66 @@ namespace unit1.Model
 
         }
 
-        public Point MoveLeft(Point step)
+        public Entity MoveLeft(Entity entity)
         {
-            Point nextstep = new Point();
-            nextstep = new Point(120, 40);
-            return nextstep;
+            entity.XY = new Point(entity.XY.X - 80, entity.XY.Y);
+            return entity;
         }
 
-        public void MoveRight()
+        public Entity MoveRight(Entity entity)
         {
-
+            entity.XY = new Point(entity.XY.X + 80, entity.XY.Y);
+            return entity;
         }
 
-        public void MoveUp()
+        public Entity MoveUp(Entity entity)
         {
-
+            entity.XY = new Point(entity.XY.X, entity.XY.Y - 80);
+            return entity;
         }
 
-        public void MoveDown()
+        public Entity MoveDown(Entity entity)
         {
-
+            entity.XY = new Point(entity.XY.X, entity.XY.Y + 80);
+            return entity;
         }
-        
 
+        public Entity Start()
+        {
+            Entity entity = new Entity(GetCenterById(4));
+            return entity;
+        }
+
+        public Point[] BuildTrace(Entity entity)
+        {
+            List<Point> trace = new List<Point>();
+            Random rnd = new Random();
+            trace.Add(entity.XY);
+            do
+            {
+                int id = rnd.Next(0, 4);
+                switch (id)
+                {
+                    case 0:
+                        MoveLeft(entity);
+                        trace.Add(entity.XY);
+                        break;
+                    case 1:
+                        MoveUp(entity);
+                        trace.Add(entity.XY);
+                        break;
+                    case 2:
+                        MoveRight(entity);
+                        trace.Add(entity.XY);
+                        break;
+                    case 3:
+                        MoveDown(entity);
+                        trace.Add(entity.XY);
+                        break;
+                }
+            } while (points.Contains(entity.XY));
+            return trace.ToArray();
+        }
 
         public void StartVampus()
         {
