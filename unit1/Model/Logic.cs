@@ -113,7 +113,7 @@ namespace unit1.Model
                         if (entity.XY == GetCenterById(i))
                             if (IsTrap(i))
                                 if ((traps[i, 0] == 1) || (traps[i, 0] == 2))
-                                    traps[i, 1] = traps[i, 1] + 1;
+                                    traps[i, 1] += 1;
                     break;
                 case 1:
                     for (int i = 0; i < n; i++)
