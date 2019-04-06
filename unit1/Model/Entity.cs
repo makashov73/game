@@ -11,6 +11,8 @@ namespace unit1.Model
     {
         public Point XY { get; set; }
 
+        public bool start { get; set; } = false;
+
         public Entity() { }
 
         public Entity(Point start)

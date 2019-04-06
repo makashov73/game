@@ -12,11 +12,6 @@ namespace unit1.Model
 {
     class Logic
     {
-
-        //Draw draw = new Draw();
-
-        
-        //Point[] points;
         const int n = 9; // размерность массива
         int[] traps = new int[n] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         List<Point> points = new List<Point>();
@@ -49,16 +44,6 @@ namespace unit1.Model
             return dot;
         }
 
-        public bool InRect(Point step)
-        {
-            Rectangle area = new Rectangle();
-            area.Location = new Point(40, 40);
-            area.Size = new Size(200, 200);
-
-            return area.Contains(step);
-
-        }
-
         public Entity MoveLeft(Entity entity)
         {
             entity.XY = new Point(entity.XY.X - 80, entity.XY.Y);
@@ -83,53 +68,36 @@ namespace unit1.Model
             return entity;
         }
 
-        public Entity Start()
-        {
-            Entity entity = new Entity(GetCenterById(4));
-            return entity;
-        }
-
         public Point[] BuildTrace(Entity entity)
         {
             List<Point> trace = new List<Point>();
             Random rnd = new Random();
-            trace.Add(entity.XY);
-            do
-            {
-                int id = rnd.Next(0, 4);
-                switch (id)
+                trace.Add(entity.XY);
+                do
                 {
-                    case 0:
-                        MoveLeft(entity);
-                        trace.Add(entity.XY);
-                        break;
-                    case 1:
-                        MoveUp(entity);
-                        trace.Add(entity.XY);
-                        break;
-                    case 2:
-                        MoveRight(entity);
-                        trace.Add(entity.XY);
-                        break;
-                    case 3:
-                        MoveDown(entity);
-                        trace.Add(entity.XY);
-                        break;
-                }
-            } while (points.Contains(entity.XY));
+                    int id = rnd.Next(0, 4);
+                    switch (id)
+                    {
+                        case 0:
+                            MoveLeft(entity);
+                            trace.Add(entity.XY);
+                            break;
+                        case 1:
+                            MoveUp(entity);
+                            trace.Add(entity.XY);
+                            break;
+                        case 2:
+                            MoveRight(entity);
+                            trace.Add(entity.XY);
+                            break;
+                        case 3:
+                            MoveDown(entity);
+                            trace.Add(entity.XY);
+                            break;
+                    }
+                } while (points.Contains(entity.XY));
             return trace.ToArray();
         }
-
-        public void StartVampus()
-        {
-
-        }
-
-        public void StartGhost()
-        {
-
-        }
-
 
         public int[] SetupTraps()
         {
@@ -139,7 +107,7 @@ namespace unit1.Model
             int k = 0;
             while (k < 6)
             {
-                type = rnd.Next(1, 9);
+                type = rnd.Next(0, 9);
                 if(traps[type] == 0)
                 {
                     if (k > 2)

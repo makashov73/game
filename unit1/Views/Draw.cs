@@ -90,11 +90,11 @@ namespace unit1.Views
 
             Point[] bell =
             {
-                new Point(centr.X-40,centr.Y),
-                new Point(centr.X,centr.Y-40),
-                new Point(centr.X+40,centr.Y),
-                new Point(centr.X,centr.Y+40),
-                new Point(centr.X-40,centr.Y)
+                new Point(centr.X-38,centr.Y),
+                new Point(centr.X,centr.Y-38),
+                new Point(centr.X+38,centr.Y),
+                new Point(centr.X,centr.Y+38),
+                new Point(centr.X-38,centr.Y)
             };
 
             using (Graphics g = Graphics.FromImage(gamemap.Image))
@@ -110,58 +110,40 @@ namespace unit1.Views
 
             Point[] bell =
             {
-                new Point(centr.X-40,centr.Y),
+                new Point(centr.X-38,centr.Y),
                 new Point(centr.X-10,centr.Y-10),
-                new Point(centr.X,centr.Y-40),
+                new Point(centr.X,centr.Y-38),
                 new Point(centr.X+10,centr.Y-10),
-                new Point(centr.X+40,centr.Y),
+                new Point(centr.X+38,centr.Y),
                 new Point(centr.X+10,centr.Y+10),
-                new Point(centr.X,centr.Y+40),
+                new Point(centr.X,centr.Y+38),
                 new Point(centr.X-10,centr.Y+10),
-                new Point(centr.X-40,centr.Y)
+                new Point(centr.X-38,centr.Y)
             };
 
             using (Graphics g = Graphics.FromImage(gamemap.Image))
             {
-                g.DrawLines(blackPen, bell);
+                g.DrawLines(blackPenTraps, bell);
                 gamemap.Refresh();
             }
         }
 
-        public void PlaceTraps(PictureBox gamemap, int[] traps)
+        public void DrawTraps(PictureBox gamemap, int[] traps)
         {
-            //gamemap.Image = new Bitmap(gamemap.Width, gamemap.Height);
-            //using (Graphics g = Graphics.FromImage(gamemap.Image))
-            //{
-
-                /*Point[] points =
+            for (int i = 0; i < 9; i++)
+            {
+                switch(traps[i])
                 {
-                    new Point(40, 40),
-                    new Point(120, 40),
-                    new Point(200, 40),
-                    new Point(40, 120),
-                    new Point(120, 120),
-                    new Point(200, 120),
-                    new Point(40,200),
-                    new Point(120, 200),
-                    new Point(200,200)
-                };
-
-                g.DrawLines(blackPen, points);*/
-
-                // цикл по массиву
-                // если элемент = 0 - ничего
-                // если элемент = 1 - колокольчик
-                // если элемент = 2 - детектор протоплазмы
-                // GetCenterById
-            //}
-
-
-        }
-
-        public void ClearTrace()
-        {
-
+                    case 0:
+                        break;
+                    case 1:
+                        DrawBell(gamemap, i);
+                        break;
+                    case 2:
+                        DrawPlasm(gamemap, i);
+                        break;
+                }
+            }
         }
         
     }

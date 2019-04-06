@@ -17,10 +17,6 @@ namespace unit1.Controller
         //Logic cell = new Logic();
         //Draw draw = new Draw();
         
-        public void MoveLeft()
-        {
-
-        }
 
 
     }
