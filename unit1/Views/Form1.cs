@@ -23,41 +23,41 @@ namespace unit1
         Pen catTrace = new Pen(Color.FromArgb(255, 58, 119, 227), 3);
         Pen vampusTrace = new Pen(Color.FromArgb(255, 42, 159, 29), 3);
         Pen ghostTrace = new Pen(Color.FromArgb(255, 237, 194, 51), 3);
-        int[] traps = new int[9];
+        int[,] traps = new int[9, 2];
         
         public Form1()
         {
             InitializeComponent();
             draw.DrawMap(getPB);
-            Meow = new Entity(logic.GetCenterById(4));
-            Vampus = new Entity(logic.GetCenterById(4));
-            Ghost = new Entity(logic.GetCenterById(4));
+            Meow = new Entity(logic.GetCenterById(4), 0);
+            Vampus = new Entity(logic.GetCenterById(4), 1);
+            Ghost = new Entity(logic.GetCenterById(4), 2);
             logic.SetupCenters();
             traps = logic.SetupTraps();
+
             draw.DrawTraps(getPB, traps);
         }
-
         
-        private void button1_Click(object sender, EventArgs e) // стереть тракектории
+        private void button1_Click(object sender, EventArgs e) // очистка траекторий
         {
             draw.DrawMap(getPB);
             draw.DrawTraps(getPB, traps);
-            Meow.start = false;
-            Vampus.start = false;
-            Ghost.start = false;
+            Meow.Start = false;
+            Vampus.Start = false;
+            Ghost.Start = false;
         }
         
-        private void button2_Click(object sender, EventArgs e) //перетасовать ловушки
+        private void button2_Click(object sender, EventArgs e) // перетасовка ловушек
         {
             draw.DrawMap(getPB);
             traps = logic.SetupTraps();
             draw.DrawTraps(getPB, traps);
-            Meow.start = false;
-            Vampus.start = false;
-            Ghost.start = false;
+            Meow.Start = false;
+            Vampus.Start = false;
+            Ghost.Start = false;
         }
 
-        public PictureBox getPB
+        public PictureBox getPB //получить игровое поле
         {
             get
             {
@@ -66,37 +66,34 @@ namespace unit1
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) //запустить кота
         {
-            if (!Meow.start)
+            if (!Meow.Start)
             {
                 Meow.XY = logic.GetCenterById(4);
-                draw.DrawTrace(logic.BuildTrace(Meow), getPB, catTrace);
-                Meow.start = true;
+                draw.DrawTrace(logic.BuildTrace(Meow), getPB, catTrace, traps);
+                Meow.Start = true;
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) //запустить вампуса
         {
-            if (!Vampus.start)
+            if (!Vampus.Start)
             {
                 Vampus.XY = logic.GetCenterById(4);
-                draw.DrawTrace(logic.BuildTrace(Vampus), getPB, vampusTrace);
-                Vampus.start = true;
+                draw.DrawTrace(logic.BuildTrace(Vampus), getPB, vampusTrace, traps);
+                Vampus.Start = true;
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e) // запустить призрака
         {
-            if (!Ghost.start)
+            if (!Ghost.Start)
             {
                 Ghost.XY = logic.GetCenterById(4);
-                draw.DrawTrace(logic.BuildTrace(Ghost), getPB, ghostTrace);
-                Ghost.start = true;
+                draw.DrawTrace(logic.BuildTrace(Ghost), getPB, ghostTrace, traps);
+                Ghost.Start = true;
             }
         }
-
-
-
     }
 }

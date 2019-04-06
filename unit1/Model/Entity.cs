@@ -7,17 +7,21 @@ using System.Drawing;
 
 namespace unit1.Model
 {
-    class Entity
+    class Entity // класс сущности
     {
-        public Point XY { get; set; }
+        public Point XY { get; set; } // для начальных координат
 
-        public bool start { get; set; } = false;
+        public bool Start { get; set; } = false; // защита от повторных траекторий
 
-        public Entity() { }
+        public int Type { get; set; } = 0; // тип сущности
 
-        public Entity(Point start)
+        public Entity() { } // пустой конструктор
+
+        public Entity(Point start, int type) // конструктор класса
         {
             XY = start;
+
+            Type = type;
         }
     }
 }
