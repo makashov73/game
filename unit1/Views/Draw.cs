@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Drawing;
 using System.Windows.Forms;
 using unit1.Model;
@@ -18,8 +18,9 @@ namespace unit1.Views
 
         public void DrawMap(PictureBox gamemap) // отрисовка игрового поля
         {
+            gamemap.BackgroundImage = new Bitmap(gamemap.Width, gamemap.Height);
             gamemap.Image = new Bitmap(gamemap.Width, gamemap.Height);
-            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            using (Graphics g = Graphics.FromImage(gamemap.BackgroundImage))
             {
                 Point[] points =
                 {
@@ -49,7 +50,6 @@ namespace unit1.Views
             DrawTraps(gamemap, traps);
             using (Graphics g = Graphics.FromImage(gamemap.Image))
             {
-                
                 g.DrawLines(ct, trace);
                 gamemap.Refresh();
             }
@@ -68,7 +68,7 @@ namespace unit1.Views
                 new Point(center.X-38,center.Y)
             };
 
-            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            using (Graphics g = Graphics.FromImage(gamemap.BackgroundImage))
             {
                 if(activated < 2)
                     g.DrawLines(blackPenTraps, bell);
@@ -99,7 +99,7 @@ namespace unit1.Views
                 new Point(center.X-38,center.Y)
             };
 
-            using (Graphics g = Graphics.FromImage(gamemap.Image))
+            using (Graphics g = Graphics.FromImage(gamemap.BackgroundImage))
             {
                 if (activated < 2)
                 g.DrawLines(blackPenTraps, plasm);
